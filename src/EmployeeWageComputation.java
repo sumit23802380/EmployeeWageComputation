@@ -4,7 +4,7 @@ public class EmployeeWageComputation {
     private static final int PART_TIME_EMPLOYEE = 2;
     private static final int WAGE_PER_HOUR = 20;
     /*
-     *@desc : Checks the attendance of employee is full time , part time or absent
+     *@desc : Checks the attendance of employee is full time , part-time or absent
      *@params :
      *@return : int status
      */
@@ -19,26 +19,38 @@ public class EmployeeWageComputation {
     private static int calculateDailyWage(int hoursWorked){
         return (hoursWorked*WAGE_PER_HOUR);
     }
+
+    private static void calculateMonthlyWage(){
+        int monthlyWage = 0;
+        for(int dayNumber = 1;dayNumber<=20;dayNumber++){
+            int particularDayAttendance = checkAttendance();
+            int hoursWorked;
+            int dailyWage = 0;
+            switch (particularDayAttendance){
+                case EMPLOYEE_ABSENT :
+                    System.out.println("Employee is Absent");
+                    System.out.println("Daily Wage on day "+ dayNumber+ " is : 0");
+                    break;
+                case FULL_TIME_EMPLOYEE:
+                    hoursWorked = 8;
+                    System.out.println("Employee is Present and Full Time Employee");
+                    dailyWage = calculateDailyWage(hoursWorked);
+                    System.out.println("Daily Wage on day " + dayNumber +" is : " + dailyWage);
+                    break;
+                case PART_TIME_EMPLOYEE:
+                    hoursWorked = 4;
+                    System.out.println("Employee is Present and Part Time Employee");
+                    dailyWage = calculateDailyWage(hoursWorked);
+                    System.out.println("Daily Wage on day " + dayNumber +" is : " + dailyWage);
+                default:
+                    System.out.println("No Category Defined");
+            }
+            monthlyWage += dailyWage;
+        }
+        System.out.println("Monthly Wage for Employee is :" + monthlyWage);
+    }
     public static void main(String[] args) {
         System.out.println("Welcome to Employee Wage Computation Program");
-        int hoursWorked;
-        int employeeAttendance = checkAttendance();
-        switch (employeeAttendance){
-            case EMPLOYEE_ABSENT :
-                System.out.println("Employee is Absent");
-                System.out.println("Daily Employee Wage is : 0");
-                break;
-            case FULL_TIME_EMPLOYEE:
-                hoursWorked = 8;
-                System.out.println("Employee is Present and Full Time Employee");
-                System.out.println("Daily Employee Wage of Full time Employee is : " + calculateDailyWage(hoursWorked));
-                break;
-            case PART_TIME_EMPLOYEE:
-                hoursWorked = 4;
-                System.out.println("Employee is Present and Part Time Employee");
-                System.out.println("Daily Employee Wage of Part time Employee is : " + calculateDailyWage(hoursWorked));
-            default:
-                System.out.println("No Category Defined");
-        }
+        calculateMonthlyWage();
     }
 }
