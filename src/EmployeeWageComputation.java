@@ -1,8 +1,11 @@
+import javax.sound.midi.Soundbank;
+
 public class EmployeeWageComputation {
     private static final int EMPLOYEE_ABSENT = 0;
     private static final int FULL_TIME_EMPLOYEE = 1;
     private static final int PART_TIME_EMPLOYEE = 2;
     private static final int WAGE_PER_HOUR = 20;
+    private static final int MAX_WORKING_HOURS = 100;
     /*
      *@desc : Checks the attendance of employee is full time , part-time or absent
      *@params :
@@ -13,39 +16,37 @@ public class EmployeeWageComputation {
     }
     /*
      *@desc : Calculated the daily wage of employee
-     *@params : No of hours worked by employee , No of wage per hour
+     *@params :
      *@return : int wage
      */
-    private static int calculateDailyWage(int hoursWorked){
-        return (hoursWorked*WAGE_PER_HOUR);
+    private static int calculateDailyWage(){
+        int particularDayAttendance = checkAttendance();
+        int hoursWorked = 0;
+        switch (particularDayAttendance){
+            case EMPLOYEE_ABSENT :
+                break;
+            case FULL_TIME_EMPLOYEE:
+                hoursWorked = 8;
+                break;
+            case PART_TIME_EMPLOYEE:
+                hoursWorked = 4;
+                break;
+            default:
+                System.out.println("No Category Defined");
+        }
+        int dailyWage = hoursWorked*WAGE_PER_HOUR;
+        System.out.println("Daily Wage is " + dailyWage);
+        return dailyWage;
     }
-
+    /*
+     *@desc : Calculated the monthly wage of employee
+     *@params :
+     *@return : int wage
+     */
     private static void calculateMonthlyWage(){
         int monthlyWage = 0;
         for(int dayNumber = 1;dayNumber<=20;dayNumber++){
-            int particularDayAttendance = checkAttendance();
-            int hoursWorked;
-            int dailyWage = 0;
-            switch (particularDayAttendance){
-                case EMPLOYEE_ABSENT :
-                    System.out.println("Employee is Absent");
-                    System.out.println("Daily Wage on day "+ dayNumber+ " is : 0");
-                    break;
-                case FULL_TIME_EMPLOYEE:
-                    hoursWorked = 8;
-                    System.out.println("Employee is Present and Full Time Employee");
-                    dailyWage = calculateDailyWage(hoursWorked);
-                    System.out.println("Daily Wage on day " + dayNumber +" is : " + dailyWage);
-                    break;
-                case PART_TIME_EMPLOYEE:
-                    hoursWorked = 4;
-                    System.out.println("Employee is Present and Part Time Employee");
-                    dailyWage = calculateDailyWage(hoursWorked);
-                    System.out.println("Daily Wage on day " + dayNumber +" is : " + dailyWage);
-                default:
-                    System.out.println("No Category Defined");
-            }
-            monthlyWage += dailyWage;
+            monthlyWage += calculateDailyWage();
         }
         System.out.println("Monthly Wage for Employee is :" + monthlyWage);
     }
