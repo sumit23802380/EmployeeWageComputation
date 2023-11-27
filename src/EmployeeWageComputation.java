@@ -1,22 +1,15 @@
 public class EmployeeWageComputation {
+    private static final int EMPLOYEE_ABSENT = 0;
+    private static final int FULL_TIME_EMPLOYEE = 1;
+    private static final int PART_TIME_EMPLOYEE = 2;
     private static final int WAGE_PER_HOUR = 20;
     /*
-     *@desc : Checks the attendance of employee is present of absent
+     *@desc : Checks the attendance of employee is full time , part time or absent
      *@params :
-     *@return : boolean presentStatus
+     *@return : int status
      */
     private static int checkAttendance(){
-        int employeeAttendance  = (int)(Math.random() * 3)+1;
-        if(employeeAttendance == 1){
-            System.out.println("Employee is Absent");
-        }
-        else if(employeeAttendance == 2){
-            System.out.println("Employee is Present and Full Time Employee");
-        }
-        else{
-            System.out.println("Employee is Present and Part Time Employee");
-        }
-        return employeeAttendance;
+        return (int)(Math.random() * 3);
     }
     /*
      *@desc : Calculated the daily wage of employee
@@ -30,16 +23,22 @@ public class EmployeeWageComputation {
         System.out.println("Welcome to Employee Wage Computation Program");
         int hoursWorked;
         int employeeAttendance = checkAttendance();
-        if(employeeAttendance==1){
-            System.out.println("Daily Employee Wage is : 0");
-        }
-        else if(employeeAttendance==2){
-            hoursWorked = 8;
-            System.out.println("Daily Employee Wage of Full time Employee is : " + calculateDailyWage(hoursWorked));
-        }
-        else{
-            hoursWorked = 4;
-            System.out.println("Daily Employee Wage of Part time Employee is : " + calculateDailyWage(hoursWorked));
+        switch (employeeAttendance){
+            case EMPLOYEE_ABSENT :
+                System.out.println("Employee is Absent");
+                System.out.println("Daily Employee Wage is : 0");
+                break;
+            case FULL_TIME_EMPLOYEE:
+                hoursWorked = 8;
+                System.out.println("Employee is Present and Full Time Employee");
+                System.out.println("Daily Employee Wage of Full time Employee is : " + calculateDailyWage(hoursWorked));
+                break;
+            case PART_TIME_EMPLOYEE:
+                hoursWorked = 4;
+                System.out.println("Employee is Present and Part Time Employee");
+                System.out.println("Daily Employee Wage of Part time Employee is : " + calculateDailyWage(hoursWorked));
+            default:
+                System.out.println("No Category Defined");
         }
     }
 }
