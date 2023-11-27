@@ -1,8 +1,8 @@
 public class EmployeeWageComputation {
     /*
-        *@desc : Checks the attendance of employee is present of absent
-        *@params :
-        *@return : boolean presentStatus
+     *@desc : Checks the attendance of employee is present of absent
+     *@params :
+     *@return : boolean presentStatus
      */
     public static boolean checkAttendance(){
         boolean presentStatus  = (Math.random() < 0.5) ? false : true;
