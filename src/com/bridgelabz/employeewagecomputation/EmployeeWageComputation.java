@@ -7,6 +7,9 @@ public class EmployeeWageComputation {
     private static final int WAGE_PER_HOUR = 20;
     private static final int MAX_WORKING_HOURS = 100;
     private static final int MAX_WORKING_DAYS = 20;
+    public EmployeeWageComputation(){
+
+    }
     /*
      *@desc : Checks the attendance of employee is full time , part-time or absent
      *@params :
@@ -57,7 +60,7 @@ public class EmployeeWageComputation {
      *@params :
      *@return :
      */
-    private static void calculateTillMaxWorkingHoursAndDays(){
+    public static void calculateTillMaxWorkingHoursAndDays(){
         int totalDays = 0;
         int totalHours = 0;
         int totalWageTillMaxWorkingHoursAndDays = 0;
@@ -70,9 +73,5 @@ public class EmployeeWageComputation {
         System.out.println("Total working hours : " + totalHours);
         System.out.println("Total working days : " + totalDays);
         System.out.println("Total Wage till max working hours and days is : " + totalWageTillMaxWorkingHoursAndDays);
-    }
-    public static void main(String[] args) {
-        System.out.println("Welcome to Employee Wage Computation Program");
-        calculateTillMaxWorkingHoursAndDays();
     }
 }
