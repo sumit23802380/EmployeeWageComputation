@@ -1,3 +1,4 @@
+package com.bridgelabz.employeewagecomputation;
 
 public class EmployeeWageComputation {
     private static final int EMPLOYEE_ABSENT = 0;
